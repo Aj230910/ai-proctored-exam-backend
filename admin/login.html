@@ -89,26 +89,37 @@
 
 <script>
 async function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
   const error = document.getElementById("error");
 
-  const res = await fetch("http://127.0.0.1:8000/api/admin/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
-  });
+  try {
+    const res = await fetch(
+      "https://ai-proctored-exam-backend.onrender.com/api/admin/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      }
+    );
 
-  if (!res.ok) {
-    error.style.display = "block";
-    return;
+    if (!res.ok) {
+      error.style.display = "block";
+      return;
+    }
+
+    const data = await res.json();
+    localStorage.setItem("adminToken", data.access_token);
+
+    // redirect to dashboard
+    window.location.href = "/admin/";
+  } catch (err) {
+    alert("Backend not reachable");
+    console.error(err);
   }
-
-  const data = await res.json();
-  localStorage.setItem("adminToken", data.access_token);
-  window.location.href = "/admin/";
 }
 </script>
+
 
 </body>
 </html>
