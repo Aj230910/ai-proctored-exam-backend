@@ -1,15 +1,17 @@
+import os
 from jose import jwt
 from datetime import datetime, timedelta
 
-SECRET_KEY = "CHANGE_THIS_SECRET_KEY"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+# 🔐 Read from environment variables
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
 
-# Demo admin credentials (simple)
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin123"
+# 👮 Admin credentials from env
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
-def authenticate_admin(username, password):
+def authenticate_admin(username: str, password: str) -> bool:
     return username == ADMIN_USERNAME and password == ADMIN_PASSWORD
 
 def create_access_token(data: dict):
