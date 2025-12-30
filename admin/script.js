@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000/api/admin/sessions";
+const API = "https://ai-proctored-exam-backend.onrender.com/api/admin/sessions";
 const token = localStorage.getItem("adminToken");
 
 if (!token) {
