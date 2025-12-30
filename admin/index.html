@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard | AI Proctored Exam</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/17003/17003310.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #e2eff7;
+    }
+
+    header {
+      background: rgb(47, 122, 157);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    button.logout {
+      background: #cf4444;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 30px;
+    }
+
+    .card {
+      background: rgb(255, 255, 255);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
+    }
+
+    th {
+      color: #475569;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .active {
+      background: #abe8cf;
+      color: #166534;
+    }
+
+    .terminated {
+      background: #fee2e2;
+      color: #c23d3d;
+    }
+
+    canvas {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>🛡 Admin Dashboard</h2>
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<main>
+  <div class="card">
+    <h3>Live Exam Sessions</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Exam ID</th>
+          <th>Score</th>
+          <th>Violations</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <canvas id="riskChart" height="120"></canvas>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
