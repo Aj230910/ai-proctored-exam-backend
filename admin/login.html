@@ -1,125 +1,129 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Admin Login | AI Proctored Exam</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | AI Proctored Exam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * { box-sizing: border-box; }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #eef2ff, #f8fafc);
-    }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        }
 
-    .login-card {
-      background: white;
-      width: 360px;
-      padding: 32px;
-      border-radius: 14px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-    }
+        .login-card {
+            background: white;
+            width: 360px;
+            padding: 32px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
 
-    .login-card h2 {
-      margin-bottom: 6px;
-    }
+        .login-card h2 {
+            margin-bottom: 6px;
+        }
 
-    .login-card p {
-      margin-top: 0;
-      color: #64748b;
-      font-size: 14px;
-    }
+        .login-card p {
+            margin-top: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 14px;
-      border-radius: 8px;
-      border: 1px solid #cbd5f5;
-      font-size: 14px;
-    }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5f5;
+            font-size: 14px;
+        }
 
-    input:focus {
-      outline: none;
-      border-color: #6366f1;
-    }
+        input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
 
-    button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      background: #4f46e5;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      cursor: pointer;
-    }
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
 
-    button:hover {
-      background: #4338ca;
-    }
+        button:hover {
+            background: #4338ca;
+        }
 
-    .error {
-      color: red;
-      font-size: 13px;
-      margin-top: 10px;
-      display: none;
-    }
-  </style>
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="login-card">
-  <h2>Admin Login</h2>
-  <p>AI Proctored Exam Monitoring</p>
+    <div class="login-card">
+        <h2>Admin Login</h2>
+        <p>AI Proctored Exam Monitoring</p>
 
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
 
-  <button onclick="login()">Login</button>
-  <div id="error" class="error">Invalid credentials</div>
-</div>
+        <button onclick="login()">Login</button>
+        <div id="error" class="error">Invalid credentials</div>
+    </div>
 
-<script>
-async function login() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const error = document.getElementById("error");
+    <script>
+        async function login() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const error = document.getElementById("error");
 
-  try {
-    const res = await fetch(
-      "https://ai-proctored-exam-backend.onrender.com/api/admin/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      }
-    );
+            try {
+                const res = await fetch(
+                    "https://ai-proctored-exam-backend.onrender.com/api/admin/login",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username, password })
+                    }
+                );
 
-    if (!res.ok) {
-      error.style.display = "block";
-      return;
-    }
+                if (!res.ok) {
+                    error.style.display = "block";
+                    return;
+                }
 
-    const data = await res.json();
-    localStorage.setItem("adminToken", data.access_token);
+                const data = await res.json();
+                localStorage.setItem("adminToken", data.access_token);
 
-    // redirect to dashboard
-    window.location.href = "/admin/";
-  } catch (err) {
-    alert("Backend not reachable");
-    console.error(err);
-  }
-}
-</script>
+                // redirect to dashboard
+                window.location.href = "index.html";
+            } catch (err) {
+                alert("Backend not reachable");
+                console.error(err);
+            }
+        }
+    </script>
 
 
 </body>
+
 </html>
